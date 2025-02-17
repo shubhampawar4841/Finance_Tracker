@@ -24,7 +24,7 @@ function App() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"; // Use environment variable or fallback to localhost
+        const apiUrl = import.meta.env.VITE_BACKEND_URL; // Use environment variable or fallback to localhost
         const res = await axios.get(`${apiUrl}/transactions`);
         setTransactions(res.data);
       } catch (error) {
