@@ -8,7 +8,7 @@ import BudgetForm from "./components/BudgetForm"; // Import Budget Form
 import BudgetComparisonChart from "./components/BudgetComparisonChart"; // Import Budget vs Actual Chart
 import SpendingInsights from "./components/SpendingInsights"; // Import Spending Insights
 import ExpensesChart from "./components/ExpensesChart"; // Import Expenses Chart
-import CategoryPieChart from "./components/CategoryPieChart"; // Import Category Pie Chart
+import CategoryPieChart from "./components/Categorypiechart"; // Import Category Pie Chart
 
 function App() {
   const [transactions, setTransactions] = useState([]);
