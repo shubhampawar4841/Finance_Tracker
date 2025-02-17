@@ -18,7 +18,7 @@ export default function TransactionList({ onTransactionAdded, onEditTransaction 
 
   const deleteTransaction = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/transactions/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/transactions/${id}`);
       onTransactionAdded();
     } catch (error) {
       console.error("Error deleting transaction", error);

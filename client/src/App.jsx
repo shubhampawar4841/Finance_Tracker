@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/transactions");
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/transactions`);
         setTransactions(res.data);
       } catch (error) {
         console.error("Error fetching transactions", error);
