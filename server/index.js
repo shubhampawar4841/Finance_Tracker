@@ -7,11 +7,11 @@ const transactionRoutes = require("./routes/transactions");
 const app = express();
 
 // ✅ Connect to Database
-connectDB();
 
 // ✅ Middleware
 app.use(cors()); // Handle CORS
 app.use(express.json()); // Parse JSON requests
+connectDB();
 
 // ✅ Routes
 app.use("/transactions", transactionRoutes);

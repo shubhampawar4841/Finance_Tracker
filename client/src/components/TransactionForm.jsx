@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-const apiUrl = process.env.REACT_APP_API_URL  // Default to Vercel URL if not defined
 
+// Default to Vercel URL or localhost if not set in environment variables
+const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function TransactionForm({ onTransactionAdded, transaction }) {
   // Set initial state for form fields
@@ -34,9 +35,9 @@ export default function TransactionForm({ onTransactionAdded, transaction }) {
     // Choose method based on whether we are updating or creating a transaction
     const method = transaction ? "PUT" : "POST";
     const url = transaction
-    ? `${apiUrl}/transactions/${transaction._id}`
-    : `${apiUrl}/transactions`;
-  
+      ? `${apiUrl}/transactions/${transaction._id}`
+      : `${apiUrl}/transactions`;
+
     try {
       await axios({
         method,
