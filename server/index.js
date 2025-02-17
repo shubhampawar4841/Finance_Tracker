@@ -20,6 +20,7 @@ app.get("/", (req, res) => {
   res.send("Backend is running on Vercel!");
 });
 
-// ❌ Remove app.listen() because Vercel doesn't need it
+// ✅ Start Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
-module.exports = app; // ✅ Export the app for serverless deployment
