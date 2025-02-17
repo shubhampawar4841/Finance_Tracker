@@ -9,7 +9,8 @@ export default function ExpensesChart({ onTransactionAdded }) {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/transactions`);
+        const apiUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"; // Default to localhost if VITE_BACKEND_URL is not set
+        const res = await axios.get(`${apiUrl}/transactions`);
         setTransactions(res.data);
       } catch (error) {
         console.error("Error fetching transactions", error);

@@ -6,11 +6,19 @@ const transactionRoutes = require("./routes/transactions");
 
 const app = express();
 
-// ✅ Connect to Database
+// ✅ CORS Middleware to Allow All Origins
+const corsOptions = {
+  origin: '*',  // Allow requests from any origin
+  methods: 'GET,POST,PUT,DELETE',  // Allow the specified HTTP methods
+  allowedHeaders: 'Content-Type, Authorization',  // Allow specific headers
+};
+
+app.use(cors(corsOptions));  // Apply the CORS options globally
 
 // ✅ Middleware
-app.use(cors()); // Handle CORS
-app.use(express.json()); // Parse JSON requests
+app.use(express.json());  // Parse JSON requests
+
+// ✅ Connect to Database
 connectDB();
 
 // ✅ Routes

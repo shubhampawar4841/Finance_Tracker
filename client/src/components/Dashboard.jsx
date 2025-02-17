@@ -5,10 +5,12 @@ import { FaDollarSign, FaRegClock } from "react-icons/fa"; // Importing icons
 export default function Dashboard() {
   const [transactions, setTransactions] = useState([]);
 
+  // Fetch transactions from the backend
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/transactions`);
+        const apiUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"; // Fallback to localhost if the env variable is not set
+        const res = await axios.get(`${apiUrl}/transactions`);
         setTransactions(res.data);
       } catch (error) {
         console.error("Error fetching transactions", error);
@@ -17,8 +19,11 @@ export default function Dashboard() {
     fetchTransactions();
   }, []);
 
+  // Calculate total expenses
   const totalExpenses = transactions.reduce((acc, tx) => acc + tx.amount, 0);
-  const mostRecentTransactions = transactions.slice(0, 5); // Show last 5 transactions
+
+  // Show last 5 transactions
+  const mostRecentTransactions = transactions.slice(0, 5);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-8 p-8">
@@ -41,12 +46,16 @@ export default function Dashboard() {
           <div>
             <h2 className="text-xl font-semibold">Most Recent Transactions</h2>
             <ul className="space-y-2 mt-2">
-              {mostRecentTransactions.map((tx) => (
-                <li key={tx._id} className="flex justify-between">
-                  <span>{tx.description}</span>
-                  <span className="font-bold">${tx.amount}</span>
-                </li>
-              ))}
+              {mostRecentTransactions.length > 0 ? (
+                mostRecentTransactions.map((tx) => (
+                  <li key={tx._id} className="flex justify-between">
+                    <span>{tx.description}</span>
+                    <span className="font-bold">${tx.amount}</span>
+                  </li>
+                ))
+              ) : (
+                <li>No transactions available</li>
+              )}
             </ul>
           </div>
         </div>

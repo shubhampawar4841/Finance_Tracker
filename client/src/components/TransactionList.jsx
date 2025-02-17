@@ -7,6 +7,7 @@ export default function TransactionList({ onTransactionAdded, onEditTransaction 
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
+        // Use the backend URL from environment variables
         const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/transactions`);
         setTransactions(res.data);
       } catch (error) {
