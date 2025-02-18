@@ -12,12 +12,26 @@ A simple web application to track and visualize personal finances. This app allo
 - Display a monthly expenses bar chart.
 - Basic form validation for transactions.
 
+### Stage 2: Categories
+- All Stage 1 features, plus:
+  - Predefined categories for transactions (e.g., Food, Entertainment, Utilities).
+  - Category-wise pie chart for spending breakdown.
+  - Dashboard with summary cards showing:
+    - Total expenses
+    - Category breakdown
+    - Most recent transactions.
+
+### Stage 3: Budgeting
+- All Stage 2 features, plus:
+  - Set monthly category budgets.
+  - Compare budget vs actual spending with a chart.
+  - Simple spending insights to help users track their financial goals.
+
 ---
 
 ## Tech Stack
 
 - **Frontend**: 
-  - Next.js
   - React
   - Shadcn UI
   - Recharts
@@ -33,4 +47,4 @@ A simple web application to track and visualize personal finances. This app allo
 1. **Clone the repository**:
 
    ```bash
-   git clone https://github.com/your-username/personal-finance-visualizer.git
+   git clone https://github.com/shubhampawar4841/Finance_Tracker
