@@ -97,6 +97,8 @@ function App() {
                 {/* Category Breakdown (Pie Chart) */}
                 <CategoryPieChart transactions={transactions} />
 
+                <TransactionList onTransactionAdded={handleTransactionUpdated} onEditTransaction={handleEditTransaction} />
+
               </div>
             } />
 

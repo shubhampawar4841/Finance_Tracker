@@ -4,17 +4,24 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 export default function CategoryPieChart({ onTransactionAdded }) {
   const [transactions, setTransactions] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  // Fetch categories from the backend
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"; // Fallback to localhost for local dev
+        const res = await axios.get(`${apiUrl}/categories`);
+        setCategories(res.data);
+      } catch (error) {
+        console.error("Error fetching categories", error);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * Fetches transactions from the backend server.
- * Makes an HTTP GET request to the specified URL to retrieve transaction data.
- * On success, updates the transactions state with the received data.
- * Logs an error message to the console if the request fails.
- */
-
-/******  af176afe-9178-42d0-8369-badb3adb26c8  *******/    const fetchTransactions = async () => {
+    const fetchTransactions = async () => {
       try {
         const apiUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000"; // Fallback to localhost for local dev
         const res = await axios.get(`${apiUrl}/transactions`);
@@ -60,27 +67,48 @@ export default function CategoryPieChart({ onTransactionAdded }) {
         Category-wise Expense Breakdown
       </h2>
 
-      <div className="flex justify-center items-center">
-        <PieChart width={500} height={300}>
-          <Pie
-            data={chartData}
-            dataKey="value"
-            nameKey="name"
-            outerRadius={150}
-            fill="#8884d8"
-            label
-          >
+      <div className="flex justify-between items-start mb-6 space-x-6">
+        {/* Left side - PieChart */}
+        <div className="flex justify-center items-center">
+          <PieChart width={500} height={300}>
+            <Pie
+              data={chartData}
+              dataKey="value"
+              nameKey="name"
+              outerRadius={150}
+              fill="#8884d8"
+              // Remove the label prop to prevent names from showing
+            >
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                  className="transition-all duration-300 hover:scale-110"
+                />
+              ))}
+            </Pie>
+            <Tooltip />
+            {/* <Legend /> */}
+          </PieChart>
+        </div>
+
+        {/* Right side - Chart Map (Legend or Data) */}
+        <div className="flex flex-col justify-center space-y-4">
+          <p className="text-center text-gray-600">
+            This chart represents the breakdown of expenses across different categories.
+          </p>
+          <div className="space-y-2">
             {chartData.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-                className="transition-all duration-300 hover:scale-110"
-              />
+              <div key={index} className="flex items-center space-x-2">
+                <div
+                  className="w-4 h-4"
+                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                ></div>
+                <span>{entry.name}: ${entry.value}</span>
+              </div>
             ))}
-          </Pie>
-          <Tooltip />
-          <Legend />
-        </PieChart>
+          </div>
+        </div>
       </div>
     </div>
   );
