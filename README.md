@@ -2,6 +2,11 @@
 
 A simple web application to track and visualize personal finances. This app allows users to add, edit, and delete transactions, and visualizes spending through charts.
 
+![Finance Visualizer](./assets/image1.png)
+![Finance Visualizer](./assets/image2.png)  <!-- Add your image here -->
+  <!-- Add your image here -->
+
+
 ---
 
 ## Features
